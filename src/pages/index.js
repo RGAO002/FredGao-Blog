@@ -1,5 +1,6 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
+import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
@@ -69,9 +70,34 @@ const moreLinks = [
 
 const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
 
-const IndexPage = () => (
+const BlogLink = styled(Link)`
+  text-decoration: none;
+`
+
+const BlogTitle = styled.h3`
+  margin-bottom: 20px;
+  color: blue;
+`
+
+const IndexPage = ({ data }) => (
   <Layout>
-    <div className={styles.textCenter}>
+    <div>
+      <h1> Fred's Thoughts </h1>
+      <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
+      {data.allMarkdownRemark.edges.map(({ node }) => (
+        <div key={node.id}>
+          <h2>
+            <BlogLink to={node.fields.slug}>
+              <BlogTitle>
+                {node.frontmatter.title} - {node.frontmatter.date}
+              </BlogTitle>
+            </BlogLink>
+            <p>{node.excerpt}</p>
+          </h2>
+        </div>
+      ))}
+    </div>
+    {/* <div className={styles.textCenter}>
       <StaticImage
         src="../images/example.png"
         loading="eager"
@@ -114,7 +140,7 @@ const IndexPage = () => (
         <a href={`${link.url}${utmParameters}`}>{link.text}</a>
         {i !== moreLinks.length - 1 && <> · </>}
       </React.Fragment>
-    ))}
+    ))} */}
   </Layout>
 )
 
@@ -126,3 +152,25 @@ const IndexPage = () => (
 export const Head = () => <Seo title="Home" />
 
 export default IndexPage
+export const query = graphql`
+  query MyQuery {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            description
+            title
+            date
+          }
+          fields {
+            slug
+          }
+          html
+          excerpt
+        }
+      }
+    }
+  }
+`
