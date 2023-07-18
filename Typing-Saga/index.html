@@ -55,12 +55,12 @@ npm install --also=dev babel-plugin-macros
 }: EmailSignInStart) {...}
 </code></pre>
 <ol start="3">
-<li>In TypeScript, we need to use <strong><code>yield*</code></strong> instead of <strong><code>yield</code></strong>. [This is because the <strong><code>typed-redux-saga</code></strong> library uses <strong><code>yield*</code></strong> to achieve a type-safe effect.]</li>
+<li>In TypeScript, we need to use <strong><code>yield*</code></strong> instead of <strong><code>yield</code></strong>. This is because the <strong><code>typed-redux-saga</code></strong> library uses <strong><code>yield*</code></strong> to achieve a type-safe effect.</li>
 </ol>
 <pre><code class="language-tsx">const { user } = yield * call(signInWithGooglePopup)
 </code></pre>
 <ol start="4">
-<li>In TypeScript, [we need to explicitly annotate error types as <strong><code>Error</code></strong>]. This way, we can ensure that the error object in the catch block is always an instance of Error.</li>
+<li>In TypeScript, we need to explicitly annotate error types as <strong><code>Error</code></strong>. This way, we can ensure that the error object in the catch block is always an instance of Error.</li>
 </ol>
 <pre><code class="language-tsx">catch (error) {
   yield* put(signInFailed(error as Error));
