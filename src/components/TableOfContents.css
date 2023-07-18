@@ -1,0 +1,19 @@
+.table-of-contents {
+  position: fixed;
+  top: 20;
+  right: 0;
+  width: 25%;
+  height: 100%;
+  overflow-y: auto;
+
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.table-of-contents a {
+  color: var(--color-article-title);
+}

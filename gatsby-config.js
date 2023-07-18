@@ -10,10 +10,10 @@
 module.exports = {
   pathPrefix: "/FredGao-Blog",
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Fred Gao's Blog`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    author: `@RGAO002`,
+    siteUrl: `https://rgao002.github.io/FredGao-Blog`,
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -25,6 +25,33 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              offsetY: `100`,
+              icon: false,
+              className: `custom-class`,
+              maintainCase: false,
+              removeAccents: true,
+              isIconAfterHeader: true,
+            },
+          },
+          {
+            resolve: `gatsby-remark-table-of-contents`,
+            options: {
+              exclude: "Table of Contents",
+              tight: false,
+              fromHeading: 1,
+              toHeading: 6,
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `markdowns`,
@@ -32,7 +59,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-styled-components`,
-    `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

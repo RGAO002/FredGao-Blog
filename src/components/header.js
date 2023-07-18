@@ -1,14 +1,17 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import Toggle from "./Toggle"
+import moon from "../images/moon.png"
+import sun from "../images/sun.png"
 
-const Header = ({ siteTitle }) => (
+const Header = ({ siteTitle, theme }) => (
   <header
     style={{
       margin: `0 auto`,
       padding: `var(--space-4) var(--size-gutter)`,
       display: `flex`,
       alignItems: `center`,
-      justifyContent: `space-between`,
+      justifyContent: `space-evenly`,
     }}
   >
     <Link
@@ -16,10 +19,42 @@ const Header = ({ siteTitle }) => (
       style={{
         fontSize: `var(--font-sm)`,
         textDecoration: `none`,
+        color: `var(--color-title)`,
       }}
     >
       {siteTitle}
     </Link>
+    {theme !== null ? (
+      <Toggle
+        style={{ marginLeft: "100px" }}
+        icons={{
+          checked: (
+            <img
+              src={moon}
+              width="16"
+              height="16"
+              role="presentation"
+              style={{ pointerEvents: "none" }}
+            />
+          ),
+          unchecked: (
+            <img
+              src={sun}
+              width="16"
+              height="16"
+              role="presentation"
+              style={{ pointerEvents: "none" }}
+            />
+          ),
+        }}
+        checked={theme === "dark"}
+        onChange={e =>
+          window.__setPreferredTheme(e.target.checked ? "dark" : "light")
+        }
+      />
+    ) : (
+      <div style={{ height: "24px" }} />
+    )}
     <img
       alt="Gatsby logo"
       height={20}

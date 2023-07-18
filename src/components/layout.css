@@ -25,6 +25,33 @@
   --size-gutter: var(--space-5);
   --size-gap: var(--space-6);
 }
+
+body.light {
+  --color-background: white;
+  --color-text: black;
+  --color-title: black;
+  --color-date: rgb(89, 89, 224);
+}
+
+body.dark {
+  --color-background: #282c35;
+  --color-text: white;
+  --color-title: white;
+  --color-date: rgb(216, 121, 38);
+  --color-article-title: rgb(216, 121, 38);
+  --color-post-excerpt: rgb(247, 220, 197);
+}
+
+h1 {
+  color: var(--color-title);
+  transition: color 0.5s ease-out;
+}
+
+h4 {
+  color: var(--color-date);
+  transition: color 0.5s ease-out;
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
@@ -42,6 +69,7 @@ body {
   font-weight: normal;
   margin: 0;
   word-wrap: break-word;
+  background-color: var(--color-background);
 }
 a {
   background-color: transparent;
